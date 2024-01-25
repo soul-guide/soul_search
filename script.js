@@ -1,9 +1,12 @@
 var menuOnGlobal = 0;
 window.onload = performSearch();
-window.onload = fetch('https://soulguide.github.io/soul-search/index.html')
-.then(response => response.text())
-.then(text => document.getElementById('soul_search').innerHTML = text);
+window.onload = loadHtml('https://soulguide.github.io/soul-search/index.html');
 
+function loadHtml(url){
+  fetch(url)
+    .then(response => response.text())
+    .then(text => document.getElementById('soul_search').innerHTML = text);
+}
 function sendToSearch(query){
   if (!query){
     query =   document.getElementById('searchInput').value;
