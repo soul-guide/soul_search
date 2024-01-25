@@ -1,6 +1,6 @@
 var menuOnGlobal = 0;
 window.onload = performSearch();
-window.onload = fetch('https://timdnoe.github.io/soul-search-fip/index.html')
+window.onload = fetch('https://soulguide.github.io/soul-search/index.html')
 .then(response => response.text())
 .then(text => document.getElementById('soul_search').innerHTML = text);
 
