@@ -1,6 +1,8 @@
 var menuOnGlobal = 0;
-window.onload = performSearch();
-window.onload = function() {loadHtml('https://soulguide.github.io/soul-search/index.html')}
+window.onload = function() {
+  loadHtml('https://soulguide.github.io/soul-search/index.html');
+  performSearch();
+}
 
 function loadHtml(url) {
   fetch(url)
