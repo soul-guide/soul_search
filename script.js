@@ -1,12 +1,17 @@
 var menuOnGlobal = 0;
 window.onload = performSearch();
-window.onload = loadHtml('https://soulguide.github.io/soul-search/index.html');
+window.onload = function() {loadHtml('https://soulguide.github.io/soul-search/index.html')}
 
-function loadHtml(url){
+function loadHtml(url) {
   fetch(url)
-    .then(response => response.text())
-    .then(text => document.getElementById('soul_search').innerHTML = text);
+      .then(response => {
+          if (response.ok) return response.text();
+          throw new Error('Network response was not ok.');
+      })
+      .then(text => document.getElementById('soul_search').innerHTML = text)
+      .catch(error => console.error('There has been a problem with your fetch operation:', error));
 }
+
 function sendToSearch(query){
   if (!query){
     query =   document.getElementById('searchInput').value;
