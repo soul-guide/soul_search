@@ -1,9 +1,14 @@
 var menuOnGlobal = 0;
+let element = document.getElementById('soul_search');
+let sources_visble = element.getAttribute('sources-visble');
+let sources = element.getAttribute('sources');
 
 window.onload = function() {
   loadHtml('https://soulguide.github.io/soul-search/index.html')
       .then(performSearch)
       .catch(error => console.error('Error in loadHtml or performSearch:', error));
+  console.log(sources_visible)
+  console.log(sources)
 };
 
 function loadHtml(url) {
