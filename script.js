@@ -1,16 +1,19 @@
 var menuOnGlobal = 0;
 let element = document.getElementById('soul_search');
-let sources_visble = element.getAttribute('sources-visble');
+let sources_visble = element.getAttribute('sources_visble');
 let sources = element.getAttribute('sources');
 
 window.onload = function() {
   loadHtml('https://soulguide.github.io/soul-search/index.html')
       .then(performSearch)
+      .then(grabVars)
       .catch(error => console.error('Error in loadHtml or performSearch:', error));
-  console.log(sources_visible)
-  console.log(sources)
 };
 
+function grabVars(){
+  console.log(sources_visible)
+  console.log(sources)
+}
 function loadHtml(url) {
   return new Promise((resolve, reject) => {
       fetch(url)
@@ -20,8 +23,6 @@ function loadHtml(url) {
           })
           .then(text => {
               document.getElementById('soul_search').innerHTML = text;
-              console.log(sources_visible)
-              console.log(sources)
               resolve();
           })
           .catch(error => {
