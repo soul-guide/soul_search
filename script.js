@@ -20,6 +20,8 @@ function loadHtml(url) {
           })
           .then(text => {
               document.getElementById('soul_search').innerHTML = text;
+              console.log(sources_visible)
+              console.log(sources)
               resolve();
           })
           .catch(error => {
