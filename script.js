@@ -2,6 +2,7 @@ var menuOnGlobal = 0;
 let element = document.getElementById('soul_search');
 let sources_visble = element.getAttribute('sources_visble');
 let sources = element.getAttribute('sources');
+let namespace = element.getAttribute('namespace');
 
 window.onload = function() {
   loadHtml('https://soulguide.github.io/soul-search/index.html')
@@ -82,18 +83,23 @@ function performSearch(query) {
   }
   document.getElementById("loader").style.display = "inline-block"
   document.getElementById("results").style.display = "none"
-  // Perform the API call
-  fetch(`https://eoubihciw9w5j6z.m.pipedream.net`,
-  {
-    method: "POST",
-    body: JSON.stringify({
+
+  var body = {
       query: searchTerm,
       sources: sources,
       numberResults: 1,
       display_sources: true,
       url : url,
       guide: true
-    })
+    }
+  if (namespace){
+    body.namespace = namespace
+  }
+  // Perform the API call
+  fetch(`https://eoubihciw9w5j6z.m.pipedream.net`,
+  {
+    method: "POST",
+    body: JSON.stringify(body)
   })
     .then(response => response.json())
     .then(data => {
