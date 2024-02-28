@@ -37,34 +37,34 @@
   <input type="text" id="searchInput" placeholder="Type your custom question here..." style="width:100%;display:inline-block;border-style:solid;border-color:#df8a29">
   <br>
   <div id="settings">
-    <label class="container">
+    <label class="checkmarkcontainer">
      A Course in Miracles
      <input type="radio" id="ACIM" name="source" value="ACIM">
-     <span class="checkmark">
+     <span class="soulguidecheckmark">
      </span>
     </label>
-    <label class="container">
+    <label class="checkmarkcontainer">
      Bible
      <input type="radio" id="Bible" name="source" value="Bible">
-     <span class="checkmark">
+     <span class="soulguidecheckmark">
      </span>
     </label>
-    <label class="container">
+    <label class="checkmarkcontainer">
      Dao De Jing
      <input type="radio" id="Dao" name="source" value="Dao">
-     <span class="checkmark">
+     <span class="soulguidecheckmark">
      </span>
     </label>
-    <label class="container">
+    <label class="checkmarkcontainer">
      Bhagavad Gita
      <input type="radio" id="Gita" name="source" value="Gita">
-     <span class="checkmark">
+     <span class="soulguidecheckmark">
      </span>
     </label>
-    <label class="container">
+    <label class="checkmarkcontainer">
       Surprise Me
       <input type="radio" id="All" name="source" value="All" checked="checked">
-      <span class="checkmark">
+      <span class="soulguidecheckmark">
       </span>
      </label>
    </div>
@@ -110,7 +110,7 @@
     padding: 30px;
    }
    /* Customize the label (the container) */
-   .container {
+   .checkmarkcontainer {
      display: inline;
      position: relative;
      padding-left: 35px;
@@ -124,7 +124,7 @@
      user-select: none;
    }
    /* Hide the browser's default checkbox */
-   .container input {
+   .checkmarkcontainer input {
      position: absolute;
      opacity: 0;
      cursor: pointer;
@@ -132,7 +132,7 @@
      width: 0;
    }
    /* Create a custom checkbox */
-   .checkmark {
+   .soulguidecheckmark {
      position: absolute;
      top: 0;
      left: 0;
@@ -142,11 +142,11 @@
      background-color: #eee;
    }
    /* On mouse-over, add a grey background color */
-   .container:hover input ~ .checkmark {
+   .checkmarkcontainer:hover input ~ .checkmark {
      background-color: #ccc;
    }
    /* When the checkbox is checked, add a blue background */
-   .container input:checked ~ .checkmark {
+   .checkmarkcontainer input:checked ~ .checkmark {
      background-color: #2196F3;
    }
    /* Create the checkmark/indicator (hidden when not checked) */
@@ -156,11 +156,11 @@
      display: none;
    }
    /* Show the checkmark when checked */
-   .container input:checked ~ .checkmark:after {
+   .checkmarkcontainer input:checked ~ .checkmark:after {
      display: block;
    }
    /* Style the checkmark/indicator */
-   .container .checkmark:after {
+   .checkmarkcontainer .checkmark:after {
      left: 9px;
      top: 5px;
      width: 5px;
