@@ -189,32 +189,23 @@ const showSettings = () => {
  }
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOM fully loaded and parsed");
-    // Get all radio buttons with the name 'source'
-    const radios = document.querySelectorAll('input[type=radio][name=source]');
+    // Assuming 'settings' is the parent div that will definitely exist in the DOM when the page is loaded
+    const settingsContainer = document.getElementById('settings');
 
-    // Function to reset style and bold the selected label
-    function updateLabelStyle() {
-        // Reset styles for all labels
-        radios.forEach(radio => {
-            radio.parentNode.style.fontWeight = 'normal';
-        });
+    // Event delegation for radio buttons
+    settingsContainer.addEventListener('change', function(event) {
+        // Check if the changed element is a radio input
+        if (event.target && event.target.name === 'source') {
+            // Reset styles for all labels
+            const radios = settingsContainer.querySelectorAll('input[type=radio][name=source]');
+            radios.forEach(radio => {
+                radio.parentNode.style.fontWeight = 'normal';
+            });
 
-        // Bold the label of the checked radio
-        const checkedRadio = document.querySelector('input[type=radio][name=source]:checked');
-        if (checkedRadio) {
-            checkedRadio.parentNode.style.fontWeight = 'bold';
+            // Bold the label of the checked radio
+            event.target.parentNode.style.fontWeight = 'bold';
         }
-      console.log(checkedRadio)
-    }
-
-    // Add change event listener to each radio button
-    radios.forEach(radio => {
-        radio.addEventListener('change', updateLabelStyle);
     });
-
-    // Call updateLabelStyle initially in case a radio is checked by default
-    updateLabelStyle();
-    
 });
+
 
