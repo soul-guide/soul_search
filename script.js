@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (checkedRadio) {
             checkedRadio.parentNode.style.fontWeight = 'bold';
         }
+      console.log(checkedRadio)
     }
 
     // Add change event listener to each radio button
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Call updateLabelStyle initially in case a radio is checked by default
     updateLabelStyle();
-    console.log(radios)
+    
 });
 
 
