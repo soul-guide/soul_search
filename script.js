@@ -1,6 +1,6 @@
 var menuOnGlobal = 0;
 let element = document.getElementById('soul_search');
-let sources_visble = element.getAttribute('sources_visble');
+let sources_visble = element.getAttribute('sources_visible');
 let sources = element.getAttribute('sources');
 let namespace = element.getAttribute('namespace');
 
