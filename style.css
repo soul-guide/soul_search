@@ -46,11 +46,11 @@
      background-color: #eee;
    }
    /* On mouse-over, add a grey background color */
-   .checkmarkcontainer:hover input ~ .checkmark {
+   .checkmarkcontainer:hover input ~ .soulguidecheckmark  {
      background-color: #ccc;
    }
    /* When the checkbox is checked, add a blue background */
-   .checkmarkcontainer input:checked ~ .checkmark {
+   .checkmarkcontainer input:checked ~ .soulguidecheckmark  {
      background-color: #2196F3;
    }
    /* Create the checkmark/indicator (hidden when not checked) */
@@ -60,11 +60,11 @@
      display: none;
    }
    /* Show the checkmark when checked */
-   .checkmarkcontainer input:checked ~ .checkmark:after {
+   .checkmarkcontainer input:checked ~ .soulguidecheckmark :after {
      display: block;
    }
    /* Style the checkmark/indicator */
-   .checkmarkcontainer .checkmark:after {
+   .checkmarkcontainer .soulguidecheckmark :after {
      left: 9px;
      top: 5px;
      width: 5px;
