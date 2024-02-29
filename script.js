@@ -188,24 +188,5 @@ const showSettings = () => {
   return returnArray
  }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Assuming 'settings' is the parent div that will definitely exist in the DOM when the page is loaded
-    const settingsContainer = document.getElementById('settings');
-
-    // Event delegation for radio buttons
-    settingsContainer.addEventListener('change', function(event) {
-        // Check if the changed element is a radio input
-        if (event.target && event.target.name === 'source') {
-            // Reset styles for all labels
-            const radios = settingsContainer.querySelectorAll('input[type=radio][name=source]');
-            radios.forEach(radio => {
-                radio.parentNode.style.fontWeight = 'normal';
-            });
-
-            // Bold the label of the checked radio
-            event.target.parentNode.style.fontWeight = 'bold';
-        }
-    });
-});
 
 
