@@ -88,6 +88,9 @@ function sendToSearch(query){
 function performSearch(query) {
   var url = new URL(window.location);
   var searchTerm = decodeURIComponent(url.searchParams.get("q"));
+  if (!searchTerm){
+    return null
+  }
   var searchSources = decodeURIComponent(url.searchParams.get("s")).split(",");
 
   document.getElementById(searchSources).checked = true
