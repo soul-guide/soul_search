@@ -33,6 +33,34 @@ function loadHtml(url) {
   });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all radio buttons with the name 'source'
+    const radios = document.querySelectorAll('input[type=radio][name=source]');
+
+    // Function to reset style and bold the selected label
+    function updateLabelStyle() {
+        // Reset styles for all labels
+        radios.forEach(radio => {
+            radio.parentNode.style.fontWeight = 'normal';
+        });
+
+        // Bold the label of the checked radio
+        const checkedRadio = document.querySelector('input[type=radio][name=source]:checked');
+        if (checkedRadio) {
+            checkedRadio.parentNode.style.fontWeight = 'bold';
+        }
+    }
+
+    // Add change event listener to each radio button
+    radios.forEach(radio => {
+        radio.addEventListener('change', updateLabelStyle);
+    });
+
+    // Call updateLabelStyle initially in case a radio is checked by default
+    updateLabelStyle();
+});
+
+
 
 function sendToSearch(query){
   if (!query){
