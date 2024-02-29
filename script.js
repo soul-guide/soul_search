@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Call updateLabelStyle initially in case a radio is checked by default
     updateLabelStyle();
+    console.log(radios)
 });
 
 
