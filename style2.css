@@ -19,6 +19,7 @@
     font-weight: bold;
     text-align: center; /* Center the widget horizontally */
     padding-bottom: 0;
+    line-height: 0.8;
 }
 
 #soulsearch-subtitle{
