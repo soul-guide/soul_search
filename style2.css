@@ -120,4 +120,5 @@ button:hover {
     display: flex;
     justify-content: center; /* Horizontally centers the content */
     flex-direction: column; /* This is the default value, ensuring content is laid out horizontally */
+    align-items: center; /* Horizontally centers the content */
 }
