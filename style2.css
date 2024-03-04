@@ -118,7 +118,15 @@ button:hover {
 
 .centered-content {
     display: flex;
-/*     justify-content: center; /* Horizontally centers the content */ */
+/*     justify-content: center; /* Horizontally centers the content */
     flex-direction: column; /* This is the default value, ensuring content is stacked vertically */
     align-items: center; /* Horizontally centers the content */
+    flex-wrap: wrap; /* Allows children to wrap if needed */
+
+}
+
+.centered-content video {
+    display: block; /* or 'inline-block' if you prefer */
+    margin: auto; /* Ensures any explicit width doesn't affect centering */
+    max-width: 100%; /* Ensures the video doesn't overflow its container */
 }
