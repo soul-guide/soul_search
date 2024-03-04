@@ -117,5 +117,6 @@ button:hover {
    }
 
 .center {
+  display:block;
   margin: auto;
 }
