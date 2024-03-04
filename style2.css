@@ -116,7 +116,7 @@ button:hover {
      100% { transform: rotate(360deg); }
    }
 
-.center {
+.centered-content {
     display: flex;
 /*     justify-content: center; /* Horizontally centers the content */ */
     flex-direction: column; /* This is the default value, ensuring content is stacked vertically */
