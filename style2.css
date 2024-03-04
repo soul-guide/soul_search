@@ -105,6 +105,12 @@ button:hover {
      -webkit-animation: spin 2s linear infinite; /* Safari */
      animation: spin 2s linear infinite;
      margin: auto;
+
+    display: flex;
+/*     justify-content: center; /* Horizontally centers the content */
+    flex-direction: column; /* This is the default value, ensuring content is stacked vertically */
+    align-items: center; /* Horizontally centers the content */
+    flex-wrap: wrap; /* Allows children to wrap if needed */
    }
    /* Safari */
    @-webkit-keyframes spin {
