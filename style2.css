@@ -117,6 +117,8 @@ button:hover {
    }
 
 .center {
-  display:block;
-  margin: auto;
+    display: flex;
+    justify-content: center; /* Horizontally centers the content */
+    flex-direction: row; /* This is the default value, ensuring content is laid out horizontally */
+
 }
