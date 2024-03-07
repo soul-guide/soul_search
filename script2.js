@@ -33,18 +33,21 @@ window.onresize = adjustIconHeight;
 // Function to generate question buttons
 function generateQuestionButtons() {
     let questions = JSON.parse(document.getElementById('soulsearch').getAttribute('questions'))
-    console.log(questions)
-    const container = document.getElementById('sample-questions');
-    questions.forEach(question => {
-        const button = document.createElement('button');
-        button.textContent = question;
-        // Apply the "sample-question-button" class to each button
-        button.className = 'sample-question-button';
-        button.addEventListener('click', () => {
-            sendToSearch(question);
+    if (questions.length){
+        console.log(questions)
+        const container = document.getElementById('sample-questions');
+        questions.forEach(question => {
+            const button = document.createElement('button');
+            button.textContent = question;
+            // Apply the "sample-question-button" class to each button
+            button.className = 'sample-question-button';
+            button.addEventListener('click', () => {
+                sendToSearch(question);
+            });
+            container.appendChild(button);
         });
-        container.appendChild(button);
-    });
+    }
+    
 }
 
 
