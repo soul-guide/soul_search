@@ -118,6 +118,44 @@ function buildUrl(fromURL, fromQuery) {
 
     return url.toString().replace(/\+/g, '%20');
 }
+
+function constructPath(elements) {
+    // Convert the elements object to an array of its values
+    let pathArray = Object.values(elements);
+
+    // Filter out empty, null, or undefined elements
+    pathArray = pathArray.filter(element => element);
+
+    // Join the elements with a slash to form the path
+    return pathArray.join("/");
+}
+
+async function consultGuide(result_text, query, source, type='video'){
+    var response;
+    var body = {
+        query: query,
+        result: result_text,
+        source: source,
+        type:type,
+        v:"2.0"
+    }
+    // Perform the API call
+    fetch(`https://eo1lq103e0c8kna.m.pipedream.net`,
+    {
+        method: "POST",
+        body: JSON.stringify(body)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            response = data.response
+            document.getElementById('h3_text').innerHTML = response
+        })
+        .catch(error => {
+        console.error('Error fetching data:', error);
+        });
+    return ''
+}
   
 function display_result(result){
     var type = result.type
@@ -144,26 +182,52 @@ function display_result(result){
     if (type == "audio"){
         extension = 'mp3'
     }
-    var source_location = `TBD`
 
-    
-    var embedCode = `<video width="640" controls src="${source_location}" type='video/mp4' /></video>`
-    if (type == "audio"){
-        embedCode = `<audio controls><source src="${source_location}" type="audio/mpeg"></audio>`
-    }
-    var button_cta = 'Explore This Program'
+    source_location = result.media_url
+    // var source_location = `soul.search/${platform}`
+    console.log(result)
+    var pathElements = {
+        base: "soul.search",
+        owner: result.platform.replaceAll(/\s/g,"_").toLowerCase() || result.teacher.replace(" ","_").toLowerCase(),
+        work: result.title.replaceAll(/\s/g,"_").toLowerCase(),
+        chunks:'chunks',
+        filename: `${result.section}-${result.number}.${extension}`,
+        publicDomainWork: "",
+        edition: ""
+    };
+    // var source_location = constructPath(pathElements)
+    console.log(constructPath(pathElements))
+
     var url = new URL(window.location);
     var question = decodeURIComponent(url.searchParams.get("q"))
+
+    const guide = document.getElementById('soulsearch').getAttribute('guide')
+    var h3_text = `A Segment from Module ${result.section}`
+    if (guide == 'true'){
+        h3_text = ''
+        consultGuide(result.text, question, result.teacher, type=result.type)
+    }
+
+    var embedCode = `<video width="640" controls src="${source_location}" type='video/mp4' id='media'/></video>`
+    if (type == "audio"){
+        embedCode = `<audio controls><source src="${source_location}" type="audio/mpeg" id='media'></audio>`
+    }
+    var button_cta = 'Explore This Program'
+    
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
     resultItem.innerHTML = `<div class="centered-content">
-    <img src="${result.header_image_url}" width="100%">
-    <h3 style="text-align:center">A Segment from Module ${result.section}</h3>
+    <a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>
+    <h3 style="text-align:center" id="h3_text">${h3_text}</h3>
     ${embedCode}
     ${signup}
     </div>`     ;
     const resultsDiv = document.getElementById('search-results');
     resultsDiv.appendChild(resultItem);
+
+    document.getElementById('media').addEventListener('loadedmetadata', function() {
+        this.currentTime = result.start;
+      }, false);
 
     document.getElementById("search-results").style.display = "inline-block"
     document.getElementById("loader").style.display = "none"
@@ -199,12 +263,14 @@ function performSearch() {
     document.getElementById("loader").style.display = "inline-block"
     document.getElementById("search-results").style.display = "none"
 
+    let gated = document.getElementById('soulsearch').getAttribute('gated')
     var body = {
         query: searchTerm,
         sources: sources,
         numberResults: 1,
         display_sources: true,
         url : url,
+        gated:gated
         // guide: true
     }
     // Perform the API call
@@ -222,9 +288,6 @@ function performSearch() {
         });
 }
 
-function api_call(){
-
-}
 
 const colorThemes = [
     {type: 'light', primaryColor: '#fbf8f0', secondaryColor: '#42234e', icon_url:"https://irp.cdn-website.com/985193b3/dms3rep/multi/Soul+Search_Purple.svg"},
@@ -237,6 +300,7 @@ const colorThemes = [
 function applyColorTheme() {
     let themeIndex = Number(document.getElementById('soulsearch').getAttribute('theme'))
     const theme = colorThemes[themeIndex];
+
     // Update widget's main background and text color
     document.querySelector('#soulsearch').style.backgroundColor = theme.primaryColor;
     document.querySelector('#soulsearch').style.color = theme.secondaryColor;
@@ -260,6 +324,15 @@ function applyColorTheme() {
     const searchIcon = document.getElementById('search-icon');
     searchIcon.src = theme.icon_url;
 
+    // Large icon
+    const icon = document.getElementById('soulsearch').getAttribute('icon');
+    console.log(icon)
+    if (icon == 'true'){
+        document.getElementById('large-icon').src = theme.icon_url;
+        document.getElementById('large-icon').style.display = "block";
+    }
+    
+
     //Search Input
     const searchInput = document.getElementById('search-input'); // Reference to the input field
     searchInput.style.backgroundColor = theme.primaryColor; // Assuming your theme object includes this property
@@ -270,4 +343,3 @@ function applyColorTheme() {
     soulSearchWrapper.borderColor = theme.secondaryColor
 
 }
-
