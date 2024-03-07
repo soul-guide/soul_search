@@ -33,7 +33,7 @@ window.onresize = adjustIconHeight;
 // Function to generate question buttons
 function generateQuestionButtons() {
     let questions = JSON.parse(document.getElementById('soulsearch').getAttribute('questions'))
-    if (questions.length){
+    if (questions != null && questions.length()){
         console.log(questions)
         const container = document.getElementById('sample-questions');
         questions.forEach(question => {
