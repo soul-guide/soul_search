@@ -30,10 +30,22 @@ function adjustIconHeight() {
 // Adjust the icon height on window resize to ensure responsiveness
 window.onresize = adjustIconHeight;
 
+function decodeForHTMLAttribute(str) {
+    str = str
+        .replace(/&amp;/g, '&') // First, replace & to avoid double encoding
+        .replace(/&quot;/g, '"') // Encode double quotes
+        .replace(/&#39;/g, "'")   // Encode single quotes (apostrophes)
+        .replace(/&lt;/g, '<')    // Encode less than
+        .replace(/&gt;/g, '>');   // Encode greater than
+    return str.split('%^%')
+}
+
 // Function to generate question buttons
 function generateQuestionButtons() {
-    let questions = JSON.parse(document.getElementById('soulsearch').getAttribute('questions'))
-    if (questions != null && questions.length()){
+    let questions = document.getElementById('soulsearch').getAttribute('questions')
+    questions = decodeForHTMLAttribute(questions)
+    console.log(questions)
+    if (questions != null && questions.length){
         console.log(questions)
         const container = document.getElementById('sample-questions');
         questions.forEach(question => {
@@ -73,8 +85,8 @@ function updateText(){
 }
 
 function getSources(){
-    let sources = JSON.parse(document.getElementById('soulsearch').getAttribute('sources'))
-    console.log(sources)
+    // let sources = JSON.parse(document.getElementById('soulsearch').getAttribute('sources'))
+    // console.log(sources)
 }
 
 function loadingItems(){
@@ -97,7 +109,7 @@ function sendToSearch(query){
      //window.location.href = `https://soulguide.ai/testing-ground?q=${queryEncoded}`;
     //var sources = addSources();
     // var sources = document.querySelector('input[name="source"]:checked').value;
-    var sources = JSON.parse(document.getElementById('soulsearch').getAttribute('sources'))
+    var sources = decodeForHTMLAttribute(document.getElementById('soulsearch').getAttribute('sources'))
     console.log(`raw sources: ${sources}`)
     var sourcesEncoded = encodeURIComponent(sources);
     var finalUrl = `${url}?q=${queryEncoded}&s=${sources}`;
