@@ -228,10 +228,7 @@ function display_result(result){
         embedCode = `<audio controls><source src="${source_location}" type="audio/mpeg" id='media'></audio>`
     }
     var button_cta = 'Explore This Program'
-    if (gated == 'false'){
-        button_cta = 'Explore Similar Programs'
-    }
-    
+
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
     resultItem.innerHTML = `<div class="centered-content">
