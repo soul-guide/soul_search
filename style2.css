@@ -155,7 +155,7 @@ button:hover {
     padding: 10px 15px;
     margin: 20px;
     background-color: #007bff;
-    color: white;
+    color: white !important;
     border: none;
     border-radius: 4px;
     text-decoration: none; /* Removes the underline from links */
