@@ -240,9 +240,13 @@ function display_result(result){
     const resultsDiv = document.getElementById('search-results');
     resultsDiv.appendChild(resultItem);
 
-    document.getElementById('media').addEventListener('loadedmetadata', function() {
-        this.currentTime = result.start;
-      }, false);
+    let gated = document.getElementById('soulsearch').getAttribute('gated')
+    if (gataed == 'false'){
+        document.getElementById('media').addEventListener('loadedmetadata', function() {
+            this.currentTime = result.start;
+          }, false);
+    }
+    
 
     document.getElementById("search-results").style.display = "inline-block"
     document.getElementById("loader").style.display = "none"
