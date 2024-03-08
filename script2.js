@@ -241,7 +241,7 @@ function display_result(result){
     resultsDiv.appendChild(resultItem);
 
     let gated = document.getElementById('soulsearch').getAttribute('gated')
-    if (gataed == 'false'){
+    if (gated == 'false'){
         document.getElementById('media').addEventListener('loadedmetadata', function() {
             this.currentTime = result.start;
           }, false);
