@@ -223,11 +223,14 @@ function display_result(result){
         consultGuide(result.text, question, result.teacher, type=result.type)
     }
 
-    var embedCode = `<video width="640" controls src="${source_location}" type='video/mp4' id='media'/></video>`
+    var embedCode = `<video width="640" controls playsinline src="${source_location}" type='video/mp4' id='media'/></video>`
     if (type == "audio"){
         embedCode = `<audio controls><source src="${source_location}" type="audio/mpeg" id='media'></audio>`
     }
     var button_cta = 'Explore This Program'
+    if (gated == 'false'){
+        button_cta = 'Explore Similar Programs'
+    }
     
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
