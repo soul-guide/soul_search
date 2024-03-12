@@ -225,10 +225,17 @@ function display_result(result){
 
     var embedCode = `<video width="640" controls playsinline src="${source_location}" type='video/mp4' id='media'/></video>`
     if (type == "audio"){
-        embedCode = `<audio controls><source src="${source_location}" type="audio/mpeg" id='media'></audio>`
+        embedCode = `<audio controls id="media"><source src="${source_location}" type="audio/mpeg"></audio>`
     }
-    var button_cta = 'Explore This Program'
+    console.log("embedCode",embedCode)
+    let gated = document.getElementById('soulsearch').getAttribute('gated')
+    
 
+    var button_cta = 'Explore This Program'
+    if (gated == 'false'){
+        button_cta = 'Explore Similar Programs'
+    }
+    
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
     resultItem.innerHTML = `<div class="centered-content">
@@ -240,7 +247,6 @@ function display_result(result){
     const resultsDiv = document.getElementById('search-results');
     resultsDiv.appendChild(resultItem);
 
-    let gated = document.getElementById('soulsearch').getAttribute('gated')
     if (gated == 'false'){
         document.getElementById('media').addEventListener('loadedmetadata', function() {
             this.currentTime = result.start;
