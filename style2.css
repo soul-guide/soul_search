@@ -165,3 +165,14 @@ button:hover {
 .cta-button:hover {
     background-color: #0056b3;
 }
+
+@media screen and (max-width: 768px) {
+    #soulsearch {
+        max-width: 100%; /* Allows the widget to use full width on smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+    #soulsearch-title, #soulsearch-subtitle {
+        font-size: 24px; /* Adjust font size for better readability on smaller screens */
+    }
+    /* Further adjustments as needed */
+}
