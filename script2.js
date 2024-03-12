@@ -262,6 +262,7 @@ function display_result(result){
     }
 
     //Search Input
+    const theme = colorThemes[themeIndex];
     const resultsHeader = document.getElementById('results-header'); // Reference to the input field
     resultsHeader.style.color = theme.secondaryColor; // Set input text color
     
