@@ -240,7 +240,7 @@ function display_result(result){
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
     resultItem.innerHTML = `<div class="centered-content">
     <a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>
-    <h3 style="text-align:center" id="h3_text">${h3_text}</h3>
+    <h3 style="text-align:center" id="results-header">${h3_text}</h3>
     ${embedCode}
     ${signup}
     </div>`     ;
@@ -252,6 +252,10 @@ function display_result(result){
             this.currentTime = result.start;
           }, false);
     }
+
+    //Search Input
+    const resultsHeader = document.getElementById('results-header'); // Reference to the input field
+    resultsHeader.style.color = theme.secondaryColor; // Set input text color
     
 
     document.getElementById("search-results").style.display = "inline-block"
