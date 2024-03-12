@@ -372,4 +372,8 @@ function applyColorTheme() {
     const soulSearchWrapper = document.getElementById('soulsearch');
     soulSearchWrapper.borderColor = theme.secondaryColor
 
+    //Link color
+    const link = document.getElementById('soulsearchlink');
+    link.style.color = theme.secondaryColor
+
 }
