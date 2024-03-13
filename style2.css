@@ -15,6 +15,7 @@
 }
 
 #soulsearch-title{
+    margin:20px;
     font-size: 28px;
     font-weight: bold;
     text-align: center; /* Center the widget horizontally */
@@ -23,6 +24,7 @@
 }
 
 #soulsearch-subtitle{
+    margin:20px;
     font-size: 14;
     text-align: center; /* Center the widget horizontally */
 }
