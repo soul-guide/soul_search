@@ -182,7 +182,6 @@ async function consultGuide(result_text, query, source, type='video'){
   
 function display_result(result){
     var type = result.type
-    var source = result.source
     var reference = result.reference
     var text = result.text
     var cta = result.cta
@@ -190,7 +189,7 @@ function display_result(result){
     const resultItem = document.createElement('div');
 
     var masterclass_name = result.title.replace(/\s/g, "_").toLowerCase()
-    var module_number = result.section
+    var module_number = result.module
     var segment_number = result.number
     console.log('media_type')
     console.log(type)
@@ -211,10 +210,10 @@ function display_result(result){
     console.log(result)
     var pathElements = {
         base: "soul.search",
-        owner: result.platform.replaceAll(/\s/g,"_").toLowerCase() || result.teacher.replace(" ","_").toLowerCase(),
+        owner: result.steward.replaceAll(/\s/g,"_").toLowerCase() || result.teacher.replace(" ","_").toLowerCase(),
         work: result.title.replaceAll(/\s/g,"_").toLowerCase(),
         chunks:'chunks',
-        filename: `${result.section}-${result.number}.${extension}`,
+        filename: `${result.module}-${result.number}.${extension}`,
         publicDomainWork: "",
         edition: ""
     };
