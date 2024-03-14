@@ -194,11 +194,6 @@ function display_result(result){
     console.log('media_type')
     console.log(type)
 
-    if (type == 'text'){
-        //display text results
-        return
-    }
-
     //else, display for audio or video
     var extension = 'mp4'
     if (type == "audio"){
