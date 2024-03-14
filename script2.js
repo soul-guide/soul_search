@@ -298,6 +298,8 @@ function performSearch() {
     document.getElementById('search-input').value = searchTerm
 
     var sources = decodeURIComponent(url.searchParams.get("s")).split(",");
+    var steward = document.getElementById('soulsearch').getAttribute('steward')
+    var teacher = document.getElementById('soulsearch').getAttribute('teacher')
 
     document.getElementById("loader").style.display = "inline-block"
     document.getElementById("search-results").style.display = "none"
@@ -306,6 +308,8 @@ function performSearch() {
     var body = {
         query: searchTerm,
         sources: sources,
+        steward: steward,
+        teacher: teacher,
         numberResults: 1,
         display_sources: true,
         url : url,
