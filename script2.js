@@ -245,12 +245,15 @@ function display_result(result){
     
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
-    resultItem.innerHTML = `<div class="centered-content">
-    <a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>
-    <h3 style="text-align:center" id="results-header">${h3_text}</h3>
+    fullInner = `<div class="centered-content">`
+    if (result.header_image_url){
+        fullInner = fullInner + `<a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
+    }
+    fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>
     ${embedCode}
     ${signup}
-    </div>`     ;
+    </div>`
+    resultItem.innerHTML = fullInner
     const resultsDiv = document.getElementById('search-results');
     resultsDiv.appendChild(resultItem);
 
