@@ -270,8 +270,9 @@ function display_result(result){
     let themeIndex = Number(document.getElementById('soulsearch').getAttribute('theme'))
     const theme = colorThemes[themeIndex];
     const resultsHeader = document.getElementById('results-header'); // Reference to the input field
-    resultsHeader.style.color = theme.secondaryColor; // Set input text color
-    
+    if (resultsHeader){
+        resultsHeader.style.color = theme.secondaryColor; // Set input text color
+    }
 
     document.getElementById("search-results").style.display = "inline-block"
     document.getElementById("loader").style.display = "none"
