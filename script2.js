@@ -241,10 +241,6 @@ function display_result(result){
     console.log("embedCode",embedCode)
     let gated = document.getElementById('soulsearch').getAttribute('gated')
     
-
-    
-
-    
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
     fullInner = `<div class="centered-content"><h2>${result.title}</h2>`
@@ -253,8 +249,9 @@ function display_result(result){
     }
     var showh3 = ['video','audio'];
     if (showh3.includes(type)){
-        fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>
+        fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>`
     }
+    fullInner = fullInner + `
     ${embedCode}
     ${signup}
     </div>`
