@@ -225,21 +225,25 @@ function display_result(result){
         consultGuide(result.text, question, result.teacher, type=result.type)
     }
 
+    var button_cta = 'Explore This Program'
+    if (gated == 'false'){
+        button_cta = 'Explore Similar Programs'
+    }
+
     var embedCode = `<video width="640" controls playsinline src="${source_location}" type='video/mp4' id='media'/></video>`
     if (type == "audio"){
         embedCode = `<audio controls id="media"><source src="${source_location}" type="audio/mpeg"></audio>`
     }
     if (type == "text"){
         embedCode = `<p>${result.text}</p>`
+        button_cta = 'Explore More'
     }
     console.log("embedCode",embedCode)
     let gated = document.getElementById('soulsearch').getAttribute('gated')
     
 
-    var button_cta = 'Explore This Program'
-    if (gated == 'false'){
-        button_cta = 'Explore Similar Programs'
-    }
+    
+
     
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
@@ -247,7 +251,10 @@ function display_result(result){
     if (result.header_image_url){
         fullInner = `<div class="centered-content"><a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
     }
-    fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>
+    var showh3 = ['video','audio'];
+    if (showh3.includes(type)){
+        fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>
+    }
     ${embedCode}
     ${signup}
     </div>`
