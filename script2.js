@@ -234,6 +234,9 @@ function display_result(result){
     if (type == "audio"){
         embedCode = `<audio controls id="media"><source src="${source_location}" type="audio/mpeg"></audio>`
     }
+    if (type == "text"){
+        embedCode = `<p>${result.text}</p>`
+    }
     console.log("embedCode",embedCode)
     let gated = document.getElementById('soulsearch').getAttribute('gated')
     
