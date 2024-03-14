@@ -224,7 +224,7 @@ function display_result(result){
     var question = decodeURIComponent(url.searchParams.get("q"))
 
     const guide = document.getElementById('soulsearch').getAttribute('guide')
-    var h3_text = `A Segment from Module ${result.section}`
+    var h3_text = `A Segment from Module ${result.module}`
     if (guide == 'true'){
         h3_text = ''
         consultGuide(result.text, question, result.teacher, type=result.type)
