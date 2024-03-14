@@ -117,10 +117,10 @@ function sendToSearch(query){
      //window.location.href = `https://soulguide.ai/testing-ground?q=${queryEncoded}`;
     //var sources = addSources();
     // var sources = document.querySelector('input[name="source"]:checked').value;
-    var sources = decodeForHTMLAttribute(document.getElementById('soulsearch').getAttribute('sources'))
-    console.log(`raw sources: ${sources}`)
-    var sourcesEncoded = encodeURIComponent(sources);
-    var finalUrl = `${url}?q=${queryEncoded}&s=${sources}`;
+    // var sources = decodeForHTMLAttribute(document.getElementById('soulsearch').getAttribute('sources'))
+    // console.log(`raw sources: ${sources}`)
+    // var sourcesEncoded = encodeURIComponent(sources);
+    var finalUrl = `${url}?q=${queryEncoded}`;
     // if (menuOnGlobal){
     //     finalUrl = finalUrl + `&m=y`
     // }
