@@ -225,6 +225,7 @@ function display_result(result){
         consultGuide(result.text, question, result.teacher, type=result.type)
     }
 
+    let gated = document.getElementById('soulsearch').getAttribute('gated')
     var button_cta = 'Explore This Program'
     if (gated == 'false'){
         button_cta = 'Explore Similar Programs'
@@ -239,7 +240,7 @@ function display_result(result){
         button_cta = 'Explore More'
     }
     console.log("embedCode",embedCode)
-    let gated = document.getElementById('soulsearch').getAttribute('gated')
+    
     
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
