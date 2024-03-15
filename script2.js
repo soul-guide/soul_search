@@ -153,9 +153,9 @@ function display_result(result){
         button_cta = 'Explore Similar Programs'
     }
 
-    var embedCode = `<video width="640" controls playsinline src="${source_location}" type='video/mp4' id='media'/></video>`
+    var embedCode = `<video width="640" controls controlsList="nodownload" playsinline src="${source_location}" type='video/mp4' id='media'/></video>`
     if (type == "audio"){
-        embedCode = `<audio controls id="media"><source src="${source_location}" type="audio/mpeg"></audio>`
+        embedCode = `<audio controls controlsList="nodownload" id="media"><source src="${source_location}" type="audio/mpeg"></audio>`
     }
     if (type == "text"){
         embedCode = `<p>${result.text}</p>`
