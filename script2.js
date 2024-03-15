@@ -164,10 +164,16 @@ function display_result(result){
     
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
-    fullInner = `<div class="centered-content"><h2>${result.title}</h2>`
-    if (result.header_image_url){
-        fullInner = `<div class="centered-content"><a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
+    var guide_response = result.guide
+    var fullInner = ''
+    if(guide_response){
+        fullInner = `<p>${guide_response}</p>`
     }
+    var title_label = `<div class="centered-content"><h2>${result.title}</h2>`
+    if (result.header_image_url){
+        title_label = `<div class="centered-content"><a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
+    }
+    fullInner = fullInner + title_label
     var showh3 = ['video','audio'];
     if (showh3.includes(type)){
         fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>`
