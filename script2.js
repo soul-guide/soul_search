@@ -10,7 +10,6 @@ function loadHtml(url) {
                 document.getElementById('search-form').addEventListener('submit', function(e) {
                     e.preventDefault();
                     const query = document.getElementById('search-input').value;
-                    searchSpiritualTexts(query);
                     sendToSearch(query)
                 });
                 resolve();
@@ -22,7 +21,7 @@ function loadHtml(url) {
     });
   }
 
-  const colorThemes = [
+const colorThemes = [
     {type: 'light', primaryColor: '#fbf8f0', secondaryColor: '#42234e', icon_url:"https://irp.cdn-website.com/985193b3/dms3rep/multi/Soul+Search_Purple.svg"},
     {type: 'dark', primaryColor: '#42234e', secondaryColor: '#fbf8f0', icon_url:"https://irp.cdn-website.com/985193b3/dms3rep/multi/Soul+Search_Orange.svg"},
     {type: 'light', primaryColor: '#FFFFFF', secondaryColor: '#222222', icon_url:"https://irp.cdn-website.com/985193b3/dms3rep/multi/Soul+Search_Black.svg"},
@@ -71,17 +70,10 @@ function generateQuestionButtons() {
 }
 
 
-// Function to handle search - Make sure this is defined or updated to reflect any existing search functionality
-function searchSpiritualTexts(query) {
-    document.getElementById('search-input').value = query; // Update search input value
-    document.getElementById('search-results').innerHTML = `<p>Search results for "${query}"</p>`; // Placeholder for search results
-}
-
 // Generate question buttons on page load
 window.onload = () => {
     loadHtml('https://soulguide.github.io/soul-search/index2.html')
       .then(loadingItems)
-    //   .then(grabVars)
       .catch(error => console.error('Error in loadHtml or performSearch:', error));
 };
 
@@ -92,18 +84,11 @@ function updateText(){
     document.getElementById('soulsearch-subtitle').innerHTML = subtitle;
 }
 
-function getSources(){
-    // let sources = JSON.parse(document.getElementById('soulsearch').getAttribute('sources'))
-    // console.log(sources)
-}
-
 function loadingItems(){
     generateQuestionButtons();
     adjustIconHeight(); // Call previously defined functions if necessary
-    const randomThemeIndex = Math.floor(Math.random() * colorThemes.length);
     applyColorTheme();
     updateText();
-    getSources();
     performSearch();
 }
 
@@ -112,19 +97,10 @@ function sendToSearch(query){
     if (!query){
         return null
     }
-     var queryEncoded = encodeURIComponent(query)
-     var url = location.protocol + '//' + location.host + location.pathname
-     //window.location.href = `https://soulguide.ai/testing-ground?q=${queryEncoded}`;
-    //var sources = addSources();
-    // var sources = document.querySelector('input[name="source"]:checked').value;
-    // var sources = decodeForHTMLAttribute(document.getElementById('soulsearch').getAttribute('sources'))
-    // console.log(`raw sources: ${sources}`)
-    // var sourcesEncoded = encodeURIComponent(sources);
+    var queryEncoded = encodeURIComponent(query)
+    var url = location.protocol + '//' + location.host + location.pathname
     var finalUrl = `${url}?q=${queryEncoded}`;
-    // if (menuOnGlobal){
-    //     finalUrl = finalUrl + `&m=y`
-    // }
-     window.location.href = finalUrl
+    window.location.href = finalUrl
 }
 
 function buildUrl(fromURL, fromQuery) {
@@ -142,55 +118,12 @@ function buildUrl(fromURL, fromQuery) {
     return url.toString().replace(/\+/g, '%20');
 }
 
-function constructPath(elements) {
-    // Convert the elements object to an array of its values
-    let pathArray = Object.values(elements);
-
-    // Filter out empty, null, or undefined elements
-    pathArray = pathArray.filter(element => element);
-
-    // Join the elements with a slash to form the path
-    return pathArray.join("/");
-}
-
-async function consultGuide(result_text, query, source, type='video'){
-    var response;
-    var body = {
-        query: query,
-        result: result_text,
-        source: source,
-        type:type,
-        v:"2.0"
-    }
-    // Perform the API call
-    fetch(`https://eo1lq103e0c8kna.m.pipedream.net`,
-    {
-        method: "POST",
-        body: JSON.stringify(body)
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            response = data.response
-            document.getElementById('h3_text').innerHTML = response
-        })
-        .catch(error => {
-        console.error('Error fetching data:', error);
-        });
-    return ''
-}
-  
 function display_result(result){
     var type = result.type
-    var reference = result.reference
-    var text = result.text
     var cta = result.cta
     // var guide = result.guide.response
     const resultItem = document.createElement('div');
 
-    var masterclass_name = result.title.replace(/\s/g, "_").toLowerCase()
-    var module_number = result.module
-    var segment_number = result.number
     console.log('media_type')
     console.log(type)
 
@@ -203,27 +136,16 @@ function display_result(result){
     source_location = result.media_url
     // var source_location = `soul.search/${platform}`
     console.log(result)
-    var pathElements = {
-        base: "soul.search",
-        owner: result.steward.replaceAll(/\s/g,"_").toLowerCase() || result.teacher.replace(" ","_").toLowerCase(),
-        work: result.title.replaceAll(/\s/g,"_").toLowerCase(),
-        chunks:'chunks',
-        filename: `${result.module}-${result.number}.${extension}`,
-        publicDomainWork: "",
-        edition: ""
-    };
-    // var source_location = constructPath(pathElements)
-    console.log(constructPath(pathElements))
 
     var url = new URL(window.location);
     var question = decodeURIComponent(url.searchParams.get("q"))
 
     const guide = document.getElementById('soulsearch').getAttribute('guide')
-    var h3_text = `A Segment from Module ${result.module}`
-    if (guide == 'true'){
-        h3_text = ''
-        consultGuide(result.text, question, result.teacher, type=result.type)
+    chap_text = 'Module'
+    if (type == 'text'){
+        chap_text = 'Chapter'
     }
+    var h3_text = `A Segment from ${chap_text} ${result.chapter}`
 
     let gated = document.getElementById('soulsearch').getAttribute('gated')
     var button_cta = 'Explore This Program'
@@ -239,8 +161,6 @@ function display_result(result){
         embedCode = `<p>${result.text}</p>`
         button_cta = 'Explore More'
     }
-    console.log("embedCode",embedCode)
-    
     
     var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
     var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
@@ -306,6 +226,7 @@ function performSearch() {
     var sources = decodeURIComponent(url.searchParams.get("s")).split(",");
     var steward = document.getElementById('soulsearch').getAttribute('steward')
     var teacher = document.getElementById('soulsearch').getAttribute('teacher')
+    var guide = document.getElementById('soulsearch').getAttribute('guide')
 
     document.getElementById("loader").style.display = "inline-block"
     document.getElementById("search-results").style.display = "none"
@@ -313,14 +234,16 @@ function performSearch() {
     let gated = document.getElementById('soulsearch').getAttribute('gated')
     var body = {
         query: searchTerm,
-        sources: sources,
-        steward: steward,
-        teacher: teacher,
+        // sources: sources,
+        filter:{
+            steward: steward,
+            teacher: teacher,
+        },
         numberResults: 1,
-        display_sources: true,
-        url : url,
-        gated:gated
-        // guide: true
+        // display_sources: true,
+        // url : url,
+        gated:gated,
+        guide: guide
     }
     // Perform the API call
     fetch(`https://eon0klfitimzqd5.m.pipedream.net`,
