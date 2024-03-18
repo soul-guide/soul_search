@@ -147,7 +147,7 @@ function display_result(result){
     }
     var h3_text = `A Segment from ${chap_text} ${result.chapter}`
     if (result.chapter_title){
-        var h3_text = `A Segment from ${result.chapter}`
+        var h3_text = `A Segment from ${result.chapter_title}`
     }
 
     let gated = document.getElementById('soulsearch').getAttribute('gated')
