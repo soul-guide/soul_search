@@ -35,7 +35,7 @@ function adjustIconHeight() {
 }
 
 // Adjust the icon height on window resize to ensure responsiveness
-window.onresize = adjustIconHeight;
+// window.onresize = adjustIconHeight;
 
 function decodeForHTMLAttribute(str) {
     str = str
@@ -86,7 +86,7 @@ function updateText(){
 
 function loadingItems(){
     generateQuestionButtons();
-    adjustIconHeight(); // Call previously defined functions if necessary
+    // adjustIconHeight(); // Call previously defined functions if necessary
     applyColorTheme();
     updateText();
     performSearch();
