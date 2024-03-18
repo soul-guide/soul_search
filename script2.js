@@ -294,7 +294,7 @@ function applyColorTheme() {
 
     // Insert proper icon
     const searchIcon = document.getElementById('search-icon');
-    searchIcon.fill = theme.secondaryColor;
+    searchIcon.style.fill = theme.secondaryColor;
 
     //Search Input
     const searchInput = document.getElementById('search-input'); // Reference to the input field
