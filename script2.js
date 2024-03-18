@@ -147,7 +147,7 @@ function display_result(result){
     }
     var h3_text = `A Segment from ${chap_text} ${result.chapter}`
     if (result.chapter_title){
-        var h3_text = `A Segment from ${result.chapter_title}`
+        var h3_text = `From <i>${result.chapter_title}</i>:`
     }
 
     let gated = document.getElementById('soulsearch').getAttribute('gated')
@@ -295,15 +295,6 @@ function applyColorTheme() {
     // Insert proper icon
     const searchIcon = document.getElementById('search-icon');
     searchIcon.src = theme.icon_url;
-
-    // Large icon
-    const icon = document.getElementById('soulsearch').getAttribute('icon');
-    console.log(icon)
-    if (icon == 'true'){
-        document.getElementById('large-icon').src = theme.icon_url;
-        document.getElementById('large-icon').style.display = "block";
-    }
-    
 
     //Search Input
     const searchInput = document.getElementById('search-input'); // Reference to the input field
