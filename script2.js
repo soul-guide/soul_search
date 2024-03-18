@@ -146,6 +146,9 @@ function display_result(result){
         chap_text = 'Chapter'
     }
     var h3_text = `A Segment from ${chap_text} ${result.chapter}`
+    if (result.chapter_title){
+        var h3_text = `A Segment from ${result.chapter}`
+    }
 
     let gated = document.getElementById('soulsearch').getAttribute('gated')
     var button_cta = 'Explore This Program'
@@ -174,7 +177,7 @@ function display_result(result){
         title_label = `<div class="centered-content"><a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
     }
     fullInner = fullInner + title_label
-    var showh3 = ['video','audio'];
+    var showh3 = ['video','audio', 'text'];
     if (showh3.includes(type)){
         fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>`
     }
