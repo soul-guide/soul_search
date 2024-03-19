@@ -30,25 +30,37 @@ const colorThemes = [
 ]
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    addCarouselItems()
+    
     let soulsearch = document.getElementById('soulsearch')
     if(soulsearch.hasAttribute('navigation')){
         let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
         carouselItems = decodeForHTMLAttribute(carouselItems)
         console.log(carouselItems)
         document.getElementById("ss-nav").style.display = "block"
+        addCarouselItems()
+        // Attach this function to your arrow buttons
+        document.getElementById('ss-next').addEventListener('click', () => moveCarousel(1));
+        document.getElementById('ss-prev').addEventListener('click', () => moveCarousel(-1));
     }
 
 });
 
-function decodeForHTMLAttribute(str) {
+function decodeForHTMLAttribute(str, json=false) {
     str = str
         .replace(/&amp;/g, '&') // First, replace & to avoid double encoding
         .replace(/&quot;/g, '"') // Encode double quotes
         .replace(/&#39;/g, "'")   // Encode single quotes (apostrophes)
         .replace(/&lt;/g, '<')    // Encode less than
         .replace(/&gt;/g, '>');   // Encode greater than
-    return str.split('%^%')
+    if(!json){
+        return str.split('%^%')
+    }
+    let array = str.split('%^%')
+    let json_array = []
+    for (var i = 0; i<array.length;i++){
+        json_array.push(JSON.parse(array[i]))
+    }
+    return json_array
 }
 
 // Function to generate question buttons
@@ -328,6 +340,8 @@ function applyColorTheme() {
 var selectedItemIndex = 0
 
 function changeSelectedItemIndex(direction){
+    let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
+    carouselItems = decodeForHTMLAttribute(carouselItems, json=true)
     if(direction > 0){
         selectedItemIndex = (selectedItemIndex - 1 + carouselItems.length) % carouselItems.length
     }
@@ -338,6 +352,8 @@ function changeSelectedItemIndex(direction){
 }
 
 function moveCarousel(direction) {
+    let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
+    carouselItems = decodeForHTMLAttribute(carouselItems, json=true)
     changeSelectedItemIndex(direction)
     const carouselInner = document.querySelector('.ss-carousel-inner');
     const items = document.querySelectorAll('.ss-carousel-item');
@@ -387,15 +403,12 @@ function moveCarousel(direction) {
     
 }
 
-// Attach this function to your arrow buttons
-document.getElementById('ss-next').addEventListener('click', () => moveCarousel(1));
-document.getElementById('ss-prev').addEventListener('click', () => moveCarousel(-1));
 
 function addCarouselItems(){
     const carouselInner = document.querySelector('.ss-carousel-inner');
 
     let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
-    carouselItems = decodeForHTMLAttribute(carouselItems)
+    carouselItems = decodeForHTMLAttribute(carouselItems, json=true)
 
     // Clear the carouselInner before adding new items
     carouselInner.innerHTML = '';
