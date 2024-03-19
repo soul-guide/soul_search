@@ -180,12 +180,21 @@ button:hover {
 }
 
 
+#ss-nav {
+  display: flex; /* Set the display to flex */
+  align-items: center; /* Center children vertically */
+  justify-content: space-between; /* Optional: space out children */
+  position: relative; /* For absolute positioning context for children */
+}
+
 .ss-carousel {
   width: 100%; /* Use 100% of the container width */
   max-width: 960px; /* Adjust to the width of your single image */
   margin: 0 auto; /* This centers the carousel container */
   overflow: hidden; /* Ensures only the content within the bounds is shown */
   position: relative;
+  flex-grow: 1; /* Ensure the carousel takes up the available horizontal space */
+
 }
 
 .ss-carousel-inner {
@@ -218,6 +227,8 @@ button:hover {
   /* border-radius: 100%; */
   font-size: 28px;
   color:#fbf8f0;
+  z-index: 2; /* Make sure navigation is above the carousel items if needed */
+
 }
 
 #ss-prev {
