@@ -321,6 +321,7 @@ let soulsearch = document.getElementById('soulsearch')
 if(soulsearch.hasAttribute('navigation')){
     let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
     carouselItems = decodeForHTMLAttribute(carouselItems)
+    document.getElementById("ss-nav").style.display = "block"
     console.log(carouselItems)
 }
 
