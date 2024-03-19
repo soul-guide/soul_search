@@ -217,8 +217,8 @@ button:hover {
 }
 
 .ss-navigate {
-  position: absolute;
-  top: 50%; /*Center vertically*/
+/*   position: absolute; */
+/*   top: 50%; /*Center vertically*/ 
   transform: translateY(-50%); /* Offset the button by half its height for perfect centering */
   text-decoration: none;
   display: inline-block;
