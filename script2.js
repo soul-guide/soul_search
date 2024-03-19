@@ -394,6 +394,9 @@ document.getElementById('ss-prev').addEventListener('click', () => moveCarousel(
 function addCarouselItems(){
     const carouselInner = document.querySelector('.ss-carousel-inner');
 
+    let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
+    carouselItems = decodeForHTMLAttribute(carouselItems)
+
     // Clear the carouselInner before adding new items
     carouselInner.innerHTML = '';
 
