@@ -126,7 +126,7 @@ button:hover {
 
 .centered-content {
     display: flex;
-/*     justify-content: center; /* Horizontally centers the content */
+    justify-content: center; /* Horizontally centers the content */
     flex-direction: column; /* This is the default value, ensuring content is stacked vertically */
     align-items: center; /* Horizontally centers the content */
     flex-wrap: wrap; /* Allows children to wrap if needed */
@@ -177,4 +177,53 @@ button:hover {
         font-size: 24px; /* Adjust font size for better readability on smaller screens */
     }
     /* Further adjustments as needed */
+}
+
+
+.ss-carousel {
+  width: 100%; /* Use 100% of the container width */
+  max-width: 960px; /* Adjust to the width of your single image */
+  margin: 0 auto; /* This centers the carousel container */
+  overflow: hidden; /* Ensures only the content within the bounds is shown */
+  position: relative;
+}
+
+.ss-carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease; /* Smooth transition for the sliding effect */
+  /* The transform will be managed by JavaScript to slide images left/right */
+}
+
+.ss-carousel-item {
+  flex: 0 0 100%; /* Each item takes up 100% of the carousel-inner's width */
+  display: flex; /* Allows for further alignment within the item */
+  justify-content: center; /* Center any content within the carousel-item */
+  align-items: center; /* Align items vertically */
+}
+    
+.ss-carousel-item img {
+    display: block;
+    max-width: 600px; /* Smaller size for non-centered items */
+    transition: transform 0.5s ease;
+}
+
+.ss-navigate {
+  position: absolute;
+  top: 50px; /*Center vertically*/
+  transform: translateY(-50%); /* Offset the button by half its height for perfect centering */
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #42234e;
+  /* border-radius: 100%; */
+  font-size: 28px;
+  color:#fbf8f0;
+}
+
+#ss-prev {
+  left: 10px; /* Adjust as needed */
+}
+
+#ss-next {
+  right: 10px; /* Adjust as needed */
 }
