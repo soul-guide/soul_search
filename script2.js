@@ -317,9 +317,12 @@ function applyColorTheme() {
 
 }
 
-let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
-carouselItems = decodeForHTMLAttribute(carouselItems)
-console.log(carouselItems)
+let soulsearch = document.getElementById('soulsearch')
+if(soulsearch.hasAttribute('navigation')){
+    let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
+    carouselItems = decodeForHTMLAttribute(carouselItems)
+    console.log(carouselItems)
+}
 
 var selectedItemIndex = 0
 
