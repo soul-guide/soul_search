@@ -31,6 +31,14 @@ const colorThemes = [
 
 window.addEventListener('DOMContentLoaded', (event) => {
     addCarouselItems()
+    let soulsearch = document.getElementById('soulsearch')
+    if(soulsearch.hasAttribute('navigation')){
+        let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
+        carouselItems = decodeForHTMLAttribute(carouselItems)
+        console.log(carouselItems)
+        document.getElementById("ss-nav").style.display = "block"
+    }
+
 });
 
 function decodeForHTMLAttribute(str) {
@@ -315,14 +323,6 @@ function applyColorTheme() {
         // button.onmouseout = () => button.style.backgroundColor = theme.secondaryColor;
     });
 
-}
-
-let soulsearch = document.getElementById('soulsearch')
-if(soulsearch.hasAttribute('navigation')){
-    let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
-    carouselItems = decodeForHTMLAttribute(carouselItems)
-    document.getElementById("ss-nav").style.display = "block"
-    console.log(carouselItems)
 }
 
 var selectedItemIndex = 0
