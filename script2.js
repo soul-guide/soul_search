@@ -29,13 +29,9 @@ const colorThemes = [
 
 ]
 
-function adjustIconHeight() {
-    var searchBarHeight = document.getElementById('search-input').offsetHeight;
-    document.getElementById('search-icon').style.height = searchBarHeight + 'px';
-}
-
-// Adjust the icon height on window resize to ensure responsiveness
-// window.onresize = adjustIconHeight;
+window.addEventListener('DOMContentLoaded', (event) => {
+    addCarouselItems()
+});
 
 function decodeForHTMLAttribute(str) {
     str = str
@@ -86,7 +82,6 @@ function updateText(){
 
 function loadingItems(){
     generateQuestionButtons();
-    // adjustIconHeight(); // Call previously defined functions if necessary
     applyColorTheme();
     updateText();
     performSearch();
@@ -98,9 +93,12 @@ function sendToSearch(query){
         return null
     }
     var queryEncoded = encodeURIComponent(query)
-    var url = location.protocol + '//' + location.host + location.pathname
-    var finalUrl = `${url}?q=${queryEncoded}`;
-    window.location.href = finalUrl
+    // var url = location.protocol + '//' + location.host + location.pathname
+    // var finalUrl = `${url}?q=${queryEncoded}`;
+    const url = new URL(window.location.href);
+    url.searchParams.set('q', queryEncoded);
+    window.history.pushState(null, null, url); // or pushState
+    performSearch()
 }
 
 function buildUrl(fromURL, fromQuery) {
@@ -309,4 +307,100 @@ function applyColorTheme() {
     const link = document.getElementById('soulsearchlink');
     link.style.color = theme.secondaryColor
 
+    //nav button color
+    document.querySelectorAll('.ss-navigate').forEach(button => {
+        button.style.backgroundColor = theme.secondaryColor;
+        button.style.color = theme.primaryColor; // Assuming you want to change the text color too
+        button.onmouseover = () => button.style.backgroundColor = theme.secondaryColor;
+        // button.onmouseout = () => button.style.backgroundColor = theme.secondaryColor;
+    });
+
+}
+
+let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
+carouselItems = decodeForHTMLAttribute(carouselItems)
+console.log(carouselItems)
+
+var selectedItemIndex = 0
+
+function changeSelectedItemIndex(direction){
+    if(direction > 0){
+        selectedItemIndex = (selectedItemIndex - 1 + carouselItems.length) % carouselItems.length
+    }
+    else{
+        selectedItemIndex = (selectedItemIndex + 1) % carouselItems.length
+    }
+    console.log(carouselItems[selectedItemIndex])
+}
+
+function moveCarousel(direction) {
+    changeSelectedItemIndex(direction)
+    const carouselInner = document.querySelector('.ss-carousel-inner');
+    const items = document.querySelectorAll('.ss-carousel-item');
+    const itemWidth = items[0].offsetWidth; // Assumes all items have the same width
+    
+    // Apply the initial translation to start the sliding effect
+    if (direction === -1) {
+        // Moving to the next item, slide to the left
+        carouselInner.style.transition = 'transform 0.5s ease';
+        carouselInner.style.transform = `translateX(-${itemWidth}px)`;
+    } else if (direction === 1) {
+        // Moving to the previous item, slide to the right
+        // Insert the last item at the beginning before sliding
+        const lastItem = carouselInner.lastElementChild;
+        carouselInner.insertBefore(lastItem, carouselInner.firstElementChild);
+        
+        // Adjust the transform without transition to show the last item
+        carouselInner.style.transition = 'none';
+        carouselInner.style.transform = `translateX(-${itemWidth}px)`;
+
+        // Force a reflow
+        carouselInner.offsetWidth;
+
+        // Add transition and slide to show the new first item
+        setTimeout(() => {
+            carouselInner.style.transition = 'transform 0.5s ease';
+            carouselInner.style.transform = 'translateX(0px)';
+        }, 0);
+        
+    }
+
+    // Set a timeout to move the first item to the end after the transition finishes
+    // This needs to be done only when moving to the next item
+    if (direction === -1) {
+        setTimeout(() => {
+            // Remove transition, append the first item to the end, and reset the transform
+            carouselInner.style.transition = 'none';
+            const firstItem = carouselInner.firstElementChild;
+            carouselInner.appendChild(firstItem);
+            carouselInner.style.transform = 'translateX(0px)';
+
+            // Force a reflow
+            carouselInner.offsetWidth;
+        }, 500); // This timeout duration should match the CSS transition time
+    }
+    
+    
+}
+
+// Attach this function to your arrow buttons
+document.getElementById('ss-next').addEventListener('click', () => moveCarousel(1));
+document.getElementById('ss-prev').addEventListener('click', () => moveCarousel(-1));
+
+function addCarouselItems(){
+    const carouselInner = document.querySelector('.ss-carousel-inner');
+
+    // Clear the carouselInner before adding new items
+    carouselInner.innerHTML = '';
+
+    // Iterate over the array and create a new carousel-item for each entry
+    carouselItems.forEach(item => {
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'ss-carousel-item';
+        const img = document.createElement('img');
+        img.src = item.src; // Assuming that 'url' is where the image source is stored
+        img.alt = item.title; // Provide a meaningful description in the alt text
+        carouselItem.appendChild(img);
+        carouselInner.appendChild(carouselItem);
+    });
 }
