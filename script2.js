@@ -7,6 +7,7 @@ function loadHtml(url) {
             })
             .then(text => {
                 document.getElementById('soulsearch').innerHTML = text;
+                checkNav();
                 document.getElementById('search-form').addEventListener('submit', function(e) {
                     e.preventDefault();
                     const query = document.getElementById('search-input').value;
@@ -29,21 +30,19 @@ const colorThemes = [
 
 ]
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    
+function checkNav(){
     let soulsearch = document.getElementById('soulsearch')
     if(soulsearch.hasAttribute('navigation')){
         let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
         carouselItems = decodeForHTMLAttribute(carouselItems)
         console.log(carouselItems)
-        document.getElementById("ss-nav").style.display = "block"
+        document.getElementById("ss-nav").style.display = "block";
         addCarouselItems()
         // Attach this function to your arrow buttons
         document.getElementById('ss-next').addEventListener('click', () => moveCarousel(1));
         document.getElementById('ss-prev').addEventListener('click', () => moveCarousel(-1));
     }
-
-});
+}
 
 function decodeForHTMLAttribute(str, json=false) {
     str = str
@@ -329,9 +328,9 @@ function applyColorTheme() {
 
     //nav button color
     document.querySelectorAll('.ss-navigate').forEach(button => {
-        button.style.backgroundColor = theme.secondaryColor;
-        button.style.color = theme.primaryColor; // Assuming you want to change the text color too
-        button.onmouseover = () => button.style.backgroundColor = theme.secondaryColor;
+        button.style.backgroundColor = theme.primaryColor;
+        button.style.color = theme.secondaryColor; // Assuming you want to change the text color too
+        // button.onmouseover = () => button.style.backgroundColor = theme.secondaryColor;
         // button.onmouseout = () => button.style.backgroundColor = theme.secondaryColor;
     });
 
