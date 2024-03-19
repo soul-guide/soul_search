@@ -183,7 +183,7 @@ button:hover {
 #ss-nav {
   display: flex; /* Set the display to flex */
   align-items: center; /* Center children vertically */
-  justify-content: space-between; /* Optional: space out children */
+/*   justify-content: space-between; /* Optional: space out children */ 
   position: relative; /* For absolute positioning context for children */
 }
 
@@ -193,7 +193,7 @@ button:hover {
   margin: 0 auto; /* This centers the carousel container */
   overflow: hidden; /* Ensures only the content within the bounds is shown */
   position: relative;
-  flex-grow: 1; /* Ensure the carousel takes up the available horizontal space */
+/*   flex-grow: 1; /* Ensure the carousel takes up the available horizontal space */ 
 
 }
 
