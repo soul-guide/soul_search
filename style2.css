@@ -97,8 +97,8 @@ button:hover {
     background-color: #e0e0e0;
 }
 
-
 .loader {
+     position: absolute; /* Positioned absolutely to overlay content */
      border: 16px solid #f3f3f3;
      border-radius: 50%;
      border-top: 16px solid #42234e;
@@ -107,7 +107,7 @@ button:hover {
      -webkit-animation: spin 2s linear infinite; /* Safari */
      animation: spin 2s linear infinite;
      margin: auto;
-
+    z-index: 10; /* Ensure it's above the content */
     display: flex;
 /*     justify-content: center; /* Horizontally centers the content */
     flex-direction: column; /* This is the default value, ensuring content is stacked vertically */
