@@ -50,7 +50,9 @@ function decodeForHTMLAttribute(str, json=false) {
         .replace(/&quot;/g, '"') // Encode double quotes
         .replace(/&#39;/g, "'")   // Encode single quotes (apostrophes)
         .replace(/&lt;/g, '<')    // Encode less than
-        .replace(/&gt;/g, '>');   // Encode greater than
+        .replace(/&gt;/g, '>')   // Encode greater than
+        .replace(/%7B;/g, '{')
+        .replace(/%7D;/g, '}')
     if(!json){
         return str.split('%^%')
     }
@@ -104,6 +106,18 @@ function loadingItems(){
     applyColorTheme();
     updateText();
     performSearch();
+}
+
+function trigger_freeze(frozen=true){
+    if(frozen){
+        document.getElementById("soulsearch-inner").style.pointerEvents = "none";
+        document.getElementById("soulsearch-inner").style.opacity = 0.5;
+        document.getElementById("soulsearch-inner").style.filter = "blur(2.5px)";
+        return
+    }
+    document.getElementById("soulsearch-inner").style.pointerEvents = "auto";
+    document.getElementById("soulsearch-inner").style.opacity = 1;
+    document.getElementById("soulsearch-inner").style.filter = "none";
 }
 
 function sendToSearch(query){
@@ -189,11 +203,16 @@ function display_result(result){
     if(guide_response){
         fullInner = `<p>${guide_response}</p>`
     }
-    var title_label = `<div class="centered-content"><h2>${result.title}</h2>`
+    fullInner = fullInner + `<div class="centered-content">`
+    var title_label = `<h2>${result.title}</h2>`
+    
     if (result.header_image_url){
-        title_label = `<div class="centered-content"><a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
+        title_label = `<a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
     }
-    fullInner = fullInner + title_label
+    let navigation = document.getElementById('soulsearch').getAttribute('navigation')
+    if (!navigation){
+        fullInner = fullInner + title_label
+    }
     var showh3 = ['video','audio', 'text'];
     if (showh3.includes(type)){
         fullInner = fullInner + `<h3 style="text-align:center" id="results-header">${h3_text}</h3>`
@@ -249,10 +268,28 @@ function performSearch() {
     //if search term, populate input with it
     document.getElementById('search-input').value = searchTerm
 
-    var sources = decodeURIComponent(url.searchParams.get("s")).split(",");
-    var steward = document.getElementById('soulsearch').getAttribute('steward')
-    var teacher = document.getElementById('soulsearch').getAttribute('teacher')
+    var filter = {}
+    if (document.getElementById('soulsearch').getAttribute('steward')){
+        filter.steward = document.getElementById('soulsearch').getAttribute('steward')
+    }
+    if (document.getElementById('soulsearch').getAttribute('teacher')){
+        filter.teacher = document.getElementById('soulsearch').getAttribute('teacher')
+    }
+
+    let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
+    carouselItems = decodeForHTMLAttribute(carouselItems, json=true)
     var guide = document.getElementById('soulsearch').getAttribute('guide')
+    let navigation = document.getElementById('soulsearch').getAttribute('navigation')
+    if(navigation){
+        var navItem = carouselItems[selectedItemIndex]
+        for (let key in navItem) {
+            if(key != 'img_url'){
+                filter[key] = navItem[key]
+                // console.log(key, yourobject[key]);
+            }
+        }
+    }
+    console.log('filter',filter)
 
     document.getElementById("loader").style.display = "inline-block"
     document.getElementById("search-results").style.display = "none"
@@ -261,16 +298,16 @@ function performSearch() {
     var body = {
         query: searchTerm,
         // sources: sources,
-        filter:{
-            steward: steward,
-            teacher: teacher,
-        },
+        filter:filter,
         numberResults: 1,
         // display_sources: true,
         // url : url,
         gated:gated,
         guide: guide
     }
+
+    //freeze div
+    trigger_freeze(frozen=true)
     // Perform the API call
     fetch(`https://eon0klfitimzqd5.m.pipedream.net`,
     {
@@ -280,6 +317,7 @@ function performSearch() {
         .then(response => response.json())
         .then(data => {
             handle_results(data);
+            trigger_freeze(frozen=false)
         })
         .catch(error => {
         console.error('Error fetching data:', error);
@@ -331,9 +369,15 @@ function applyColorTheme() {
         button.style.backgroundColor = theme.primaryColor;
         button.style.color = theme.secondaryColor; // Assuming you want to change the text color too
         // button.onmouseover = () => button.style.backgroundColor = theme.secondaryColor;
-        // button.onmouseout = () => button.style.backgroundColor = theme.secondaryColor;
+        // button.onmouseout = () => button.style.backgroundColor = theme.primaryColor;
     });
 
+    //loader color
+    const loader = document.getElementById('loader')
+    
+    loader.style.borderImage = "linear-gradient(to right, red, yellow) 1 stretch"
+    loader.style.border = `16px solid ${theme.secondaryColor}`
+    loader.style.borderTop = `16px solid ${theme.primaryColor}`
 }
 
 var selectedItemIndex = 0
@@ -347,7 +391,6 @@ function changeSelectedItemIndex(direction){
     else{
         selectedItemIndex = (selectedItemIndex + 1) % carouselItems.length
     }
-    console.log(carouselItems[selectedItemIndex])
 }
 
 function moveCarousel(direction) {
@@ -417,7 +460,7 @@ function addCarouselItems(){
         const carouselItem = document.createElement('div');
         carouselItem.className = 'ss-carousel-item';
         const img = document.createElement('img');
-        img.src = item.src; // Assuming that 'url' is where the image source is stored
+        img.src = item.img_url; // Assuming that 'url' is where the image source is stored
         img.alt = item.title; // Provide a meaningful description in the alt text
         carouselItem.appendChild(img);
         carouselInner.appendChild(carouselItem);
