@@ -162,7 +162,7 @@ function display_result(result){
     if (type == 'text'){
         chap_text = 'Chapter'
     }
-    var h3_text = `A Segment from ${chap_text} ${result.chapter}`
+    var h3_text = `A Segment from ${chap_text} ${result.chapter_id}`
     if (result.chapter_title){
         var h3_text = `From <i>${result.chapter_title}</i>:`
     }
