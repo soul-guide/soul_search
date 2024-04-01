@@ -205,7 +205,7 @@ button:hover {
 }
 
 .ss-carousel-item {
-  flex: 0 0 20%; /* Each item takes up 100% of the carousel-inner's width */
+  flex: 0 0 100%; /* Each item takes up 100% of the carousel-inner's width */
   display: flex; /* Allows for further alignment within the item */
   justify-content: center; /* Center any content within the carousel-item */
   align-items: center; /* Align items vertically */
