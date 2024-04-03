@@ -229,7 +229,9 @@ function display_result(result){
         fullInner = `<p>${guide_response}</p>`
     }
     fullInner = fullInner + `<div class="centered-content">`
-    var title_label = `<h2>${result.title}</h2>`
+    let themeIndex = Number(document.getElementById('soulsearch').getAttribute('theme'))
+    const theme = colorThemes[themeIndex];
+    var title_label = `<h2 id="ss-title">${result.title}</h2>`
     
     if (result.header_image_url){
         title_label = `<a href="${cta_full}" target="_blank"><img src="${result.header_image_url}" width="100%"></a>`
@@ -251,6 +253,7 @@ function display_result(result){
     resultItem.innerHTML = fullInner
     const resultsDiv = document.getElementById('search-results');
     resultsDiv.appendChild(resultItem);
+    
 
     if (gated == 'false'){
         document.getElementById('media').addEventListener('loadedmetadata', function() {
@@ -259,10 +262,13 @@ function display_result(result){
     }
 
     //Search Input
-    let themeIndex = Number(document.getElementById('soulsearch').getAttribute('theme'))
-    const theme = colorThemes[themeIndex];
     const resultsHeader = document.getElementById('results-header'); // Reference to the input field
     if (resultsHeader){
+        resultsHeader.style.color = theme.secondaryColor; // Set input text color
+    }
+
+    const result_title = document.getElementById('ss-title'); // Reference to the input field
+    if (result_title){
         resultsHeader.style.color = theme.secondaryColor; // Set input text color
     }
 
