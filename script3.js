@@ -60,16 +60,17 @@ function checkNav(){
 function decodeForHTMLAttribute(str, json=false) {
     str = str
         .replace(/&amp;/g, '&') // First, replace & to avoid double encoding
-        .replace(/&quot;/g, '"') // Encode double quotes
+        .replace(/&&&/g, '"') // Encode double quotes
         .replace(/&#39;/g, "'")   // Encode single quotes (apostrophes)
         .replace(/&lt;/g, '<')    // Encode less than
         .replace(/&gt;/g, '>')   // Encode greater than
-        .replace(/%7B;/g, '{')
-        .replace(/%7D;/g, '}')
+        .replace(/@@@/g, '{')
+        .replace(/###/g, '}')
     if(!json){
         return str.split('%^%')
     }
     let array = str.split('%^%')
+    
     let json_array = []
     for (var i = 0; i<array.length;i++){
         json_array.push(JSON.parse(array[i]))
@@ -382,7 +383,6 @@ function applyColorTheme() {
     const frameBorder = document.getElementById('soulsearch').getAttribute('framed')
     const soulSearchWrapper = document.getElementById('soulsearch');
     soulSearchWrapper.style.border= 'none'
-    console.log(frameBorder)
     if(frameBorder == 'true'){
         soulSearchWrapper.style.border = `1px solid ${theme.secondaryColor}`
     }
