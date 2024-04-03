@@ -269,7 +269,7 @@ function display_result(result){
 
     const result_title = document.getElementById('ss-title'); // Reference to the input field
     if (result_title){
-        resultsHeader.style.color = theme.secondaryColor; // Set input text color
+        result_title.style.color = theme.secondaryColor; // Set input text color
     }
 
     document.getElementById("search-results").style.display = "block"
