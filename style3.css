@@ -1,0 +1,241 @@
+#soulsearch{
+    font-family: 'Arial', sans-serif;
+    max-width: 680px; /* Limiting the widget width */
+    margin: auto; /* Center the widget horizontally */
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative; /* Establishes a positioning context for absolute children */
+}
+
+.search-wrapper {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#soulsearch-title{
+    margin:20px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center; /* Center the widget horizontally */
+    padding-bottom: 0;
+    line-height: 0.8;
+}
+
+#soulsearch-subtitle{
+    margin:20px;
+    font-size: 14;
+    text-align: center; /* Center the widget horizontally */
+}
+
+
+#search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 0; /* Adjust if needed */
+}
+
+.sample-question-button {
+    padding: 10px 15px;
+    background-color: #fbf8f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sample-question-button:hover {
+    background-color: #f0eee8;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    padding: 5px; /* Adjust based on your design */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button img {
+    /* Set a fixed height for the icon. Adjust as needed. */
+    height: 20px; /* Example fixed height */
+}
+
+
+button:hover {
+/*     background-color: #ffffff; */
+}
+
+#soulsearch-subtext{
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: right;
+}
+
+.sample-questions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Adjust based on your design preference */
+    margin-bottom: 20px;
+}
+
+.sample-questions button {
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sample-questions button:hover {
+    background-color: #e0e0e0;
+}
+
+.loader {
+     position: absolute; /* Positioned absolutely to overlay content */
+     border: 16px solid #f3f3f3;
+     border-radius: 50%;
+     border-top: 16px solid #42234e;
+     width: 120px;
+     height: 120px;
+     -webkit-animation: spin 2s linear infinite; /* Safari */
+     animation: spin 2s linear infinite;
+     margin: auto;
+    z-index: 10; /* Ensure it's above the content */
+    display: flex;
+/*     justify-content: center; /* Horizontally centers the content */
+    flex-direction: column; /* This is the default value, ensuring content is stacked vertically */
+    align-items: center; /* Horizontally centers the content */
+    flex-wrap: wrap; /* Allows children to wrap if needed */
+   }
+   /* Safari */
+   @-webkit-keyframes spin {
+     0% { -webkit-transform: rotate(0deg); }
+     100% { -webkit-transform: rotate(360deg); }
+   }
+   @keyframes spin {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+   }
+
+.centered-content {
+    display: flex;
+    justify-content: center; /* Horizontally centers the content */
+    flex-direction: column; /* This is the default value, ensuring content is stacked vertically */
+    align-items: center; /* Horizontally centers the content */
+    flex-wrap: wrap; /* Allows children to wrap if needed */
+
+}
+
+.centered-content video {
+    display: block; /* or 'inline-block' if you prefer */
+    margin: auto; /* Ensures any explicit width doesn't affect centering */
+    max-width: 100%; /* Ensures the video doesn't overflow its container */
+}
+
+.sample-question-button {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none; /* Removes the underline from links */
+    cursor: pointer;
+}
+
+.cta-button {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 15px;
+    margin: 20px;
+    background-color: #007bff;
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none; /* Removes the underline from links */
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+    #soulsearch {
+        max-width: 100%; /* Allows the widget to use full width on smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+    #soulsearch-title, #soulsearch-subtitle {
+        font-size: 24px; /* Adjust font size for better readability on smaller screens */
+    }
+    /* Further adjustments as needed */
+}
+
+
+#ss-nav {
+  display: flex; /* Set the display to flex */
+  align-items: center; /* Center children vertically */
+/*   justify-content: space-between; /* Optional: space out children */ 
+  position: relative; /* For absolute positioning context for children */
+}
+
+.ss-carousel {
+  width: 100%; /* Use 100% of the container width */
+  max-width: 960px; /* Adjust to the width of your single image */
+  margin: 0 auto; /* This centers the carousel container */
+  overflow: hidden; /* Ensures only the content within the bounds is shown */
+  position: relative;
+/*   flex-grow: 1; /* Ensure the carousel takes up the available horizontal space */ 
+
+}
+
+.ss-carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease; /* Smooth transition for the sliding effect */
+  /* The transform will be managed by JavaScript to slide images left/right */
+}
+
+.ss-carousel-item {
+  flex: 1 0 20%; /* Each item takes up 100% of the carousel-inner's width */
+  display: flex; /* Allows for further alignment within the item */
+  justify-content: center; /* Center any content within the carousel-item */
+  align-items: center; /* Align items vertically */
+}
+    
+.ss-carousel-item img {
+    display: block;
+    max-width: 600px; /* Smaller size for non-centered items */
+    transition: transform 0.5s ease;
+}
+
+.ss-navigate {
+  position: absolute;
+  top: 50%; /*Center vertically */
+  transform: translateY(-50%); /* Offset the button by half its height for perfect centering */
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #42234e;
+  /* border-radius: 100%; */
+  font-size: 28px;
+  color:#fbf8f0;
+  z-index: 2; /* Make sure navigation is above the carousel items if needed */
+
+}
+
+#ss-prev {
+  left: 10px; /* Adjust as needed */
+}
+
+#ss-next {
+  right: 10px; /* Adjust as needed */
+}
