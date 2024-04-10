@@ -1,10 +1,14 @@
+
 window.onload = () => {
     warmFlow();
     loadHtml('https://soulguide.github.io/soul-search/index3.html')
       .then(loadingItems)
       .catch(error => console.error('Error in loadHtml or performSearch:', error));
 };
+const memberstack = window.$memberstackDom
+let appData = memberstack.getApp();
 
+console.log(memberstack)
 function warmFlow(){
     fetch(`https://eon0klfitimzqd5.m.pipedream.net`,
     {
@@ -49,7 +53,7 @@ function checkNav(){
     if(soulsearch.hasAttribute('navigation')){
         let carouselItems = document.getElementById('soulsearch').getAttribute('navigation')
         carouselItems = decodeForHTMLAttribute(carouselItems)
-        document.getElementById("ss-nav").style.display = "block";
+        document.getElementById("ss-nav").style.display = "flex";
         addCarouselItems()
         // Attach this function to your arrow buttons
         document.getElementById('ss-next').addEventListener('click', () => moveCarousel(1));
