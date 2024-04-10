@@ -53,8 +53,14 @@ function checkNav(){
         document.getElementById("ss-nav").style.display = "flex";
         addCarouselItems()
         // Attach this function to your arrow buttons
-        document.getElementById('ss-next').addEventListener('click', () => moveCarousel(1));
-        document.getElementById('ss-prev').addEventListener('click', () => moveCarousel(-1));
+        document.getElementById('ss-next').addEventListener('click', function(event) {
+            event.preventDefault();
+            moveCarousel(1)
+        }); 
+        document.getElementById('ss-prev').addEventListener('click', function(event) {
+            event.preventDefault();
+            moveCarousel(-1)
+        }); 
     }
 }
 
