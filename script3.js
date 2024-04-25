@@ -223,8 +223,10 @@ function display_result(result){
         embedCode = `<p>${result.text}</p>`
         button_cta = 'Explore More'
     }
-    
 
+    if (result.steward == 'Public'){
+        cta = 'https://www.soulguide.ai/signup'
+    }
     if(cta){
         var cta_full = buildUrl(cta, [`soulsearch=${question}`,'affiliate_id=sg']) 
         var signup = `<a href="${cta_full}" target="_blank" class="cta-button">${button_cta}</a>`
