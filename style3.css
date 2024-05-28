@@ -239,3 +239,7 @@ button:hover {
 #ss-next {
   right: 10px; /* Adjust as needed */
 }
+
+#soulsearchlink {
+    text-decoration: underline !important;
+}
